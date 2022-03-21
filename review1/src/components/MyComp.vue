@@ -18,7 +18,7 @@ const handleClick = () => {
     arrUsers.push(newUser)
 }
 const doRemove = (whichUser) => {
-    this.arrUsers.splice(this.arrUsers.indexOf(whichUser), 1)
+    arrUsers.splice(arrUsers.indexOf(whichUser), 1)
 }
 </script>
 <template>
