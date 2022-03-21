@@ -1,0 +1,24 @@
+VueJS Review Exercise 1 until tea break and then for a while after - probably done by 3:40 ish
+=======================
+In a new app, declare a root element for the app and compose the app using one or more components.
+Feel free to write everything in one file, or use separate JavaScript/vue files.
+
+Invite the user to enter a city and country then click a button
+When the button is clicked, the values provided will be appended to an array of user-entered data
+Show this array on the page in an unordered list
+
+Also compose a footer component containing a short copyright statement
+
+Optional
+--------
+When rendering the list, also show a button for each list item
+Write an event handler such that clicking the button removes that member from the array
+
+Find a way to disable the button until the city and country have been provided
+
+Add one more input field for username, bound to a data model in the component
+Provide a computed property which takes the username and assembles it something like this:
+	https://graph.facebook.com/username/picture?type=normal
+	(where username is replaced by whatever they entered for the user name)
+Bind this to the src of an image, so any FaceBook ID will show the public image of that user
+	e.g. try billgates, mickeymouse, pluto etc.
