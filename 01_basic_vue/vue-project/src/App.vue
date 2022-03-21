@@ -1,23 +1,17 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from '@/components/HelloWorld.vue'
+import Greet from '@/components/Greet.vue'
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+  <header title="changed in code">
 
     <div class="wrapper">
-      <HelloWorld msg="Coffee Time" />
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
+      <Greet msg="new message overrides default"
+        title="'new title"
+        imglocation="https://placekitten.com/64/128" />
     </div>
   </header>
 
-  <RouterView />
 </template>
 
 <style>
