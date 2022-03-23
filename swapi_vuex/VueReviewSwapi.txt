@@ -1,0 +1,17 @@
+Vue JS Swapi Exercise
+======================
+Create a new vue-cli app and start it. Provide fields and models so users enter a category and  number and see Star Wars data from https://swapi.dev/api/people/1 (or any data end point)
+
+Use routing parameters to switch between the field-entry view and the results view
+Initially just show the 'name' value, then use routing to show a component which binds to a few category-specific data members. Use different components for each category
+
+Optional
+--------
+Listen to lifecycle events to log (in a logging model) stats about a component, e.g. create/update/routing events. Provide an 'admin' component which summarises these stats
+
+Provide a log-in component (with just a button) to log in/log out by setting some model property
+Guard the admin page from access unless logged in
+
+Use a Vuex Store with mutators and actions to manage all the data models
+
+When the data comes back, iterate over the 'films' data to show a custom list of the films

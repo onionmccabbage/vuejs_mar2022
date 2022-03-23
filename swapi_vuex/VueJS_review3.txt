@@ -1,0 +1,36 @@
+Vue Review Exercise 3 until 3:00 (maybe a bit beyond)
+=====================
+Build a new Vue app (with or without routing as you choose)
+
+Aim for a component architecture. For example
+App.vue
+ |_ChooseCat.vue
+ |_ShowResults.vue
+ |_Ancillary.vue
+
+So App.vue would have very little beyond basic layout (maybe some Flexbox)
+Then the choice of category and number would be made inside 'ChooseCat.vue'
+The choices would be passed on a custom event emiitetd from 'ChooseCat.vue' to the main App
+The main App would then pass the choice back down into 'ShowResults.vue' to make the fetch request
+The relevant data wold then appear in this same component
+
+Details
+-------
+In a component, ask the user to choose a number and a category
+The number should be in the range 1-6
+The categoies are ['people', 'planets', 'vehicles', 'species', 'starships'] 
+(You could show the categories in a <select> field or as radio buttons)
+Choose between watchEffect or plain button clicks to handle the response
+Make a get request to 
+  https://swapi.dev/api/people/1  (replace people and 1 with the chosen category and number)
+Push the returned data structure on to an array (in another component) and show the 'name' property in a component
+Conditionally show other returned data. For example 'people' have properties for 'eye_color', 'height' and 'homeworld', 
+and 'planets' have 'climate', 'population' and 'rotation_period' properties
+
+NB some categories fail (e.g. /vehicles/1) so handle this outcome nicely
+
+Optional
+--------
+Where data returns other hyperlinks (e.g. 'homeworld' for people), make a second request that returns details for that end-point. Show this additional information in a component available either via routing or as a show/hide view near the original data
+Use Flexbox to lay out your page nicely
+
