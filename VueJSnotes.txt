@@ -1,0 +1,69 @@
+Vue JS
+======
+
+Toby Dussek - March 21-23
+
+9:30  start
+11:00 coffee
+12:30 lunch
+3:00  tea
+4:30  end
+
+Monday
+> Welcome and introductions
+  > what you currently know
+  > what you want to know
+> check the setup: install volar for VS Code
+- modern ES: back-ticks, ...
+> Vue is three parts: vueJS, vue-cli and vue-router
+> online references
+> no build step
+> binding in, out and two-way
+> Vue cli
+- Bootstrap
+> lifecycle hooks: onMounted
+> conditional content
+> iterating (best to provide a key)
+> template syntax (and invisible template tag) ... always inspect the generated code
+> ref() and reactive()
+
+Tuesday
+> retrieving and sending server-side data
+  vue used to use axios but now recommends fetch
+> watched (everything else is not watched)
+> simple routing
+> build app with options or with composition
+> architecture
+- supporting older browsers...
+- props and state, also setting defaults, required and types
+> after lunch review: use lifecycle, fetch, state
+- v-if compared to v-show
+> browser cache
+> building a production version
+
+Wednesday
+> use latest ECMAscript - see the unpacking syntax
+> axios is still fine
+> pure functions and pure components
+> custom events and ways to pass data around
+> use best practice and architecture where possible
+> css and Flexbox
+  see https://css-tricks.com/snippets/css/a-guide-to-flexbox/
+> single page apps with modules
+> namespacing states (and vuex)
+> let the server do server stuff and let the client do client stuff
+> after lunch review
+> named routes - can use programatically
+> More routing: passing parameters, named routes/named outlets
+  NB anything in Vue that starts with a dollar sign $ is part of Vue itself
+  e.g. $route, $props, $root
+- end of course feedback
+  here is the link: https://frameworktraining.typeform.com/to/t2I8p9Ey
+
+
+Tom Walker
+Technical Director
+www.frameworktraining.co.uk
+tom@frameworktraining.co.uk
+t: 020 3137 3920
+m: 07990 743 379
