@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Accessing Weather Data with Axios (and Vue2)</title>
+        <script src='https://cdn.jsdelivr.net/npm/vue/dist/vue.js'></script>
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js'></script>
+        <script src='https://unpkg.com/vue-router'></script>
+    </head>
+    <body>
+        <article id='app'>
+            <nav>
+                <router-link to='/'>Weather Search</router-link> |
+                <router-link to='/detail'>Detailed Results</router-link> |
+                <router-link to='/hist'>Search History</router-link>
+            </nav>
+            <router-view name='formview' @param-event='handleParams'></router-view>
+            <router-view
+                :city='params.city' 
+                :country='params.country'
+                :report='report.data'
+                name='detailview'></router-view>
+            <router-view></router-view>
+            <!-- <user-form @param-event='handleParams'></user-form> -->
+            <hr>
+            <weather-report 
+                v-if='params.city' 
+                :city='params.city' 
+                :country='params.country'
+                :description='description'
+                :temperature='temperature'></weather-report>
+        </article>
+    </body>
+    <script>
+        // components
+        const UserForm = Vue.component('user-form', {
+            computed:{
+                tempInCelcius(tempInKelvin){
+                    return parseInt(tempInKelvin)-273
+                }
+            },
+            data(){return {
+               user:{city:'London', country:'uk'},
+                countries:[
+                { text: 'United Kingdom', value: 'uk' },
+                { text: 'France', value: 'fr' },
+                { text: 'Germany', value: 'de' },
+                { text: 'Ireland', value: 'ie' },
+                { text: 'Italy', value: 'it' },
+                { text: 'Australia', value: 'aus' }
+              ]
+               }
+               },
+            template:`<div>
+                <input v-model='user.city' placeholder='city'/><br>
+                <select v-model="user.country">
+                       <option disabled value="">Country</option>
+                       <option v-for="option in countries" v-bind:value="option.value">
+                           {{ option.text }}
+                       </option>
+               </select><br>
+                <button 
+                    v-bind:disabled="user.city==='' || user.country===''" 
+                    v-on:click='sendParams'>Go</button>
+            </div>`,
+            methods:{
+                sendParams(){
+                    this.$emit('param-event', this.user)
+                }
+            }
+           } )
+        const WeatherHistory = Vue.component('weather-history', {template:`<div><h3>Weather History</h3></div>`})
+        const WeatherDetail  = Vue.component('weather-detail', {
+            template:`<div>
+                    <h2>Detailed Weather Report for {{city}} {{country}}</h2>
+                    <h3>Description: {{report.weather[0].description}}</h3>
+                    <h3>Temperature: {{report.main.temp}}K</h3>
+                    <h4>min {{report.main.temp_min}}K max {{report.main.temp_max}}K</h4>
+                    <h3>Pressure: {{report.main.pressure}}</h3>
+                    <h3>Humidity: {{report.main.humidity}}</h3>
+                    <h3>Wind Speed: {{report.wind.speed}}</h3>
+                    <h3>Wind Direction: {{report.wind.deg}}&deg;</h3>
+                </div>`,
+            props:['city', 'country', 'report'],
+            data(){return {}},
+            methods:{},
+            computed:{}
+        })
+        const WeatherReport  = Vue.component('weather-report', {
+            template:`<div>
+                    <h2>Weather Report for {{city}} {{country}}</h2>
+                    <h3>Description: {{description}}</h3>
+                    <h3>Temperature: {{temperature}}&deg;</h3>
+                </div>`,
+            props:['city', 'country', 'description', 'temperature'],
+            data(){return {}},
+            methods:{},
+            computed:{}
+        })
+
+        // routes
+        const router = new VueRouter({
+            routes: [
+                {path:'/', components:{formview:UserForm}},
+                {path:'/hist', component:WeatherHistory},
+                {path:'/detail', components:{detailview:WeatherDetail}}, //, props:true
+            ]
+        })
+        // Vue app
+        new Vue({
+            router:router,
+            el:'#app',
+            data(){return {
+                params:{},
+                weatherUrl:'',
+                report:[],
+            }},
+            watch:{
+                report(newR, oldR){console.log(`report changed from ${oldR} to ${newR}`)}
+            },
+            methods:{
+                handleParams($event){
+                    // pass the parameters down to another components
+                    this.params = $event
+                    this.getWeather()
+                },
+                getWeather(){
+                    console.log('getting weather')
+                    this.weatherUrl = `http://api.openweathermap.org/data/2.5/weather?q=${this.params.city},${this.params.country}&APPID=48f2d5e18b0d2bc50519b58cce6409f1`
+                    axios.get(this.weatherUrl)
+                        .then((response)=>{
+                            this.report = response
+                        })
+                }
+            },
+            
+            computed:{
+                description(){
+                    if(this.report !=''){
+                        return this.report.data.weather[0].description                    
+                    } else {
+                        return 'not yet available'
+                    }
+                },
+                temperature(){
+                    if(this.report !=''){
+                        return parseInt(this.report.data.main.temp) - 273
+                    } else {
+                        return 'unknown'
+                    }
+                }
+        }
+    }).$mount('#app')
+    </script>
+</html>

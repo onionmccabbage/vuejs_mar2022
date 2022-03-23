@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // some modern ECMAScript features
+        // function syntax
+        // rest operator
+        const fn = (a, b, ...rest) => {
+            // rest will contain any other parameters
+            console.log(rest)
+        }
+        fn(1, 2, 3, 4, 5, 6, false, 'wow')
+        // the spread operator
+        arr = ['dum', 'de', 'doo', 'da', 'day']
+        console.log(arr, ...arr)
+        // we can also use unpacking syntax on Arrays
+        let [w, x, y, z] = arr
+        console.log(w, x, y, z)
+
+        // and unpacking Objects
+        let obj = {name:'Timnit', age:42, admin:true}
+        let {name, age, admin} = obj // careful - variables must have same name as obj properties
+        console.log(name, age, admin)
+
+        // block syntax
+        {
+            //this is a block scope
+            let a = 1
+        }
+        {
+            // here is another block scope
+            let a = true
+        }
+
+        // many ways to write modern ES fucntions
+        const fnA = x=>x*x // exacty one incoming parameter and one line of code
+        const fnB = x=>{return x*x} // if we have braces we MUST use 'return'
+        const fnC = (x,y)=>x*y // only one line of code
+        const fnZ = (x,y)=>{return (x**2+y**2)**0.5}
+
+
+
+    </script>
+</body>
+
+</html>

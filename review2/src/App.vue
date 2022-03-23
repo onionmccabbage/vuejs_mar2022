@@ -24,6 +24,7 @@ watchEffect(async () => {
 const sendParams = () => { // only fetch weatehr when the butto is clicked!
   const url = `${API_URL}${user.city},${user.country}${APIID}`
   console.log(url)
+  // weather.data = (async()=>{await fetch(url).json()} // this time we use .then().then() instead of async-await
   fetch(url) // this time we use .then().then() instead of async-await
     .then((response) => { return response.json() })
     .then((data) => {
@@ -39,6 +40,7 @@ const sendParams = () => { // only fetch weatehr when the butto is clicked!
     <!-- <Report :report="weather.data" /> -->
     <hr />
     <section>
+      <!-- .... lazy waits until the user leaves the field before calling watchers -->
       <input v-model.lazy="user.city" placeholder="city" />
       <br />
       <select v-model="user.country">
@@ -53,8 +55,8 @@ const sendParams = () => { // only fetch weatehr when the butto is clicked!
       The weather in {{ weather.data.name }} is {{ weather.data.weather[0].description }} and {{weather.data.main.temp}}K ({{celcius}}&deg;)
     </aside>
     <hr />
-    <!-- this nect bit would be ideal as a separate component -->
-    <aside>
+    <!-- this next bit would be ideal as a separate component -->
+    <aside v-if="weather.data.name">
       <h2>Detailed Weather Report for {{ user.city }}, {{ user.country }}</h2>
       <h3>Description: {{ weather.data.weather[0].description }}</h3>
       <h3>Temperature: {{ Math.round(weather.data.main.temp - 273) }}&deg;</h3>
