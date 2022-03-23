@@ -7,19 +7,18 @@ import Home from '@/views/Home.vue'
 import About from '@/views/About.vue'
 import Products from '@/views/Products.vue'
 </script>
-
 <template>
-  <h1>This App uses Rotuing</h1>
+  <h1>This App uses Routing</h1>
   <!-- we can use views as components if needed -->
   <!-- <Home />
   <About />
   <Products /> -->
-
   <nav>
     <!-- typically links go in a 'nav' block -->
     <RouterLink to="/">Home</RouterLink> |
     <RouterLink to="/about">About</RouterLink> |
-    <RouterLink to="/products">Products</RouterLink>
+    <RouterLink to="/products">Products</RouterLink> |
+    <RouterLink to="/products/wibble">(data)</RouterLink>
   </nav>
 
 <!-- all routed components will appear in the routerView (mutually exlusive) -->

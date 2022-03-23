@@ -45,6 +45,20 @@
         const fnC = (x,y)=>x*y // only one line of code
         const fnZ = (x,y)=>{return (x**2+y**2)**0.5}
 
+        // Vue recommends pure functions (and pure components)
+        const fnPure = (str)=>{
+            // for any given input the return is entirely deterministic
+            return `the value is ${str}`
+        }
+        // impure function have side-efffects (unpredictable outcomes)
+        const fnImpure = (str)=>{
+            waffle = Math.random()
+            return `the string is ${str} and the waffle is ${waffle}`
+        }
+
+        // exercise the code
+        console.log(fnPure('stop shouting'))
+        console.log(fnImpure('stop shouting'))
 
 
     </script>

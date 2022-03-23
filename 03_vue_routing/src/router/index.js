@@ -18,9 +18,9 @@ const router = createRouter( {
         {path:'/', name:'home', component:Home},
         {path:'/about', name:'about', component:About},
         // we can 'lazy-load' routes (use for resource-hungry 'heavy' components) - load on demand
-        {path:'/products', name:'products', component:()=>{return import('../views/Products.vue')}}
+        {path:'/products', name:'products',props:true, component:()=>{return import('../views/Products.vue')}},
+        {path:'/products/:content', name:'products',props:true , component:()=>{return import('../views/Products.vue')}}
     ]
 } )
-
 // expose the router so other modules can import it
 export default router
